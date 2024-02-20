@@ -1,0 +1,58 @@
+// |===========================================================================|
+// |-----------------------------| Infos Style |-------------------------------|
+// |===========================================================================|
+
+@import "../../styles/settings.scss";
+
+// =============================================================================
+
+
+.infos-section {
+
+
+    .infos-bloc {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 70px;
+        width: 100%;
+        padding: 40px 0;
+
+        .infos-card {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 28%;
+            height: 100%;
+            font-family: Avenir, Helvetica, Arial, sans-serif;
+
+            .infos-img {
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 10px solid $color-tr;
+                border-radius: 999px;
+                width: 140px;
+                height: 140px;
+
+                img {
+                    width: 100px;
+                }
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            p {
+                color: $color-police-main;
+                font-size: 1em;
+            }
+        }
+    }
+}

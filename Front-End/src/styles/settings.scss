@@ -4,8 +4,9 @@
 
 // --------- Couleur du site ---------
 
-// $color-primary: #0c0b0c;
-// $color-secondary: #e2e2e2;
+$color-primary: #ffffff;
+$color-secondary: #2C3E50;
+$color-tr: #00BC77;
 
 // --------- Nuance du site ----------
 
@@ -28,22 +29,15 @@
 
 // --------- Nuance police -----------
 
-// $color-police-main: #d4d4d4;
+$color-police-main: #575757;
 
 // --------- Police du site ----------
 
-// @font-face {
-//     font-family: 'Audiowide';
-//     src: url(../assets/fonts/audiowide/Audiowide-Regular.ttf);
-// }
+
 
 // ------- Mixins et variables -------
 
-// $font-title: 'Audiowide';
 
-// $font-main-text: 'Grotesk';
-
-// $font-text: 'Righteous';
 
 
 // ---------- Responsive ------------
@@ -76,6 +70,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background: rgb(255, 255, 255);
 }
 
 p,

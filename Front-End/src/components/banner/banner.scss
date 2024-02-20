@@ -1,0 +1,54 @@
+// |===========================================================================|
+// |-----------------------------| Banner Style |------------------------------|
+// |===========================================================================|
+
+@import "../../styles/settings.scss";
+
+// =============================================================================
+
+
+.banner-section {
+
+
+    .banner-bloc {
+
+        position: relative;
+        width: 100%;
+        height: 400px;
+        box-shadow: 0px 0px 10px 1px rgb(91 91 91);
+        background-image: url(/src/assets/images/img/bank-tree.jpeg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: right 10% bottom 67%;
+
+        .banner-text {
+
+            position: absolute;
+            top: 50%;
+            right: 80px;
+            transform: translateY(-50%);
+            font-family: Avenir, Helvetica, Arial, sans-serif;
+            background: $color-primary;
+            width: 290px;
+            padding: 30px;
+            box-shadow: 0px 0px 10px 1px rgba(91, 91, 91, 0.404);
+
+            .banner-title {
+                color: $color-secondary;
+                font-weight: 700;
+                font-size: 1.5em;
+
+                &:nth-child(3) {
+                    margin-bottom: 20px;
+                }
+            }
+
+            .banner-desc {
+                width: 85%;
+                font-weight: 500;
+                font-size: 1.1em;
+                color: $color-secondary;
+            }
+        }
+    }
+}
