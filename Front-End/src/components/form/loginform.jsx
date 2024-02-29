@@ -12,8 +12,9 @@ export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = async (e) => {
+    const SubmitForm = async (e) => {
         e.preventDefault();
+
         try {
             const response = await dispatch(loginUser(email, password));
             console.log('Response:', response);
@@ -35,7 +36,7 @@ export const LoginForm = () => {
 
     return (
         <section className='Login-section'>
-            <form className='login-form' onSubmit={handleSubmit}>
+            <form className='login-form' onSubmit={SubmitForm}>
                 <div className='form-top'>
                     <i className="fa-solid fa-circle-user"></i>
                     <h3>Sign In</h3>
