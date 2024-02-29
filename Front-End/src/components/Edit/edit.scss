@@ -1,0 +1,80 @@
+// |===========================================================================|
+// |-----------------------------| Edit Style |--------------------------------|
+// |===========================================================================|
+
+@import "../../styles/settings.scss";
+
+// =============================================================================
+
+
+.editname-section {
+
+    display: flex;
+    justify-content: center;
+
+    .editname-bloc {
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        margin: 30px 0;
+
+        .editname-first {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h2 {
+                color: $color-primary;
+                font-size: 2em;
+                margin: 0;
+            }
+
+            .first-row {
+
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                gap: 5px;
+
+                h3 {
+                    color: $color-primary;
+                    font-size: 1.8em;
+                    margin: 0;
+                }
+
+                p {
+                    color: $color-primary;
+                    font-size: 1.8em;
+                    margin: 0;
+                }
+            }
+        }
+
+
+        .editname-scnd {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            button {
+                padding: 10px 15px;
+                border: none;
+                color: $color-primary;
+                font-weight: 600;
+                background: $color-tr;
+                border-radius: 2px;
+                transition: 0.4s ease;
+
+                &:hover {
+                    background: $hover-btn;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

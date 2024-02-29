@@ -11,22 +11,13 @@ $color-td: #12002B;
 
 // --------- Nuance du site ----------
 
-// $color-white: #ffffff;
-// $color-black: #000000;
-// $background-header: #2020206c;
-// $background-btn: #d1d1d110;
-// $profil-card-background: #1f1f1f;
+$hover-btn: #00a568;
 
 // --------- Nuance shadows ----------
 
-// $shadow-light-grey: #ffffff;
-// $shadow-lightgrey-nav: #5c5c5c50;
-// $shadow-darkgrey: #7e7e7e79;
 
 // --------- Nuance border -----------
 
-// $border-light-grey: #d4d4d433;
-// $border-btn-after: #dddddd96;
 
 // --------- Nuance police -----------
 
@@ -35,31 +26,13 @@ $color-police-main: #575757;
 // --------- Police du site ----------
 
 
-
 // ------- Mixins et variables -------
-
-
 
 
 // ---------- Responsive ------------
 
-// Small Mobile version
-// $xs: 380px;
-
 // Mobile version
-// $sm: 490px;
-
-// Large Mobile / Small tablet version
-// $md: 700px;
-
-// Tablet Version
-// $lg: 1020px;
-
-// Small desktop Version
-// $xl: 1210px;
-
-// Desktop Version
-// $xxl: 1504px;
+$xs: 620px;
 
 // ------- Ajustement du site --------
 
@@ -79,6 +52,10 @@ ul {
     margin: 0;
     list-style: none;
     padding: 0;
+}
+
+a {
+    text-decoration: none;
 }
 
 // ------- Style scrollbar --------

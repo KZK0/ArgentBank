@@ -9,6 +9,8 @@
 
 .header-section {
 
+    background: $color-primary;
+
     nav {
 
         display: flex;
@@ -17,6 +19,11 @@
         justify-content: space-between;
         padding: 0 40px;
         font-family: Avenir, Helvetica, Arial, sans-serif;
+
+        @media (max-width: $xs) {
+
+            padding: 0 10px;
+        }
 
         .header-first-bloc {
 
@@ -31,29 +38,73 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            gap: 5px;
+            gap: 20px;
 
-            &:hover {
+            @media (max-width: $xs) {
 
-                cursor: pointer;
+                width: 150px;
+            }
+
+            .scnd-user {
+
+                display: none;
+                flex-direction: row;
+                align-items: center;
+                gap: 5px;
+
+                &:hover {
+
+                    cursor: pointer;
+
+                    p {
+                        text-decoration: underline;
+                        text-underline-offset: 3px;
+                        offset-distance: 5px;
+                    }
+                }
+
+                i {
+                    font-size: 1.1em;
+                    color: $color-secondary;
+                }
 
                 p {
-                    text-decoration: underline;
-                    text-underline-offset: 3px;
-                    offset-distance: 5px;
+                    font-weight: 600;
+                    margin: 0;
+                    color: $color-secondary;
                 }
             }
 
-            i {
-                font-size: 1.1em;
-                color: $color-secondary;
+            .scnd-log {
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 5px;
+
+                &:hover {
+
+                    cursor: pointer;
+
+                    p {
+                        text-decoration: underline;
+                        text-underline-offset: 3px;
+                        offset-distance: 5px;
+                    }
+                }
+
+                i {
+                    font-size: 1.1em;
+                    color: $color-secondary;
+                }
+
+                p {
+                    font-weight: 600;
+                    margin: 0;
+                    color: $color-secondary;
+                }
             }
 
-            p {
-                font-weight: 600;
-                margin: 0;
-                color: $color-secondary;
-            }
         }
     }
 }
