@@ -25,7 +25,7 @@ export const EditName = () => {
                             </div>
                             <div className='user-champs'>
                                 <label htmlFor="user_firstname">First Name:</label>
-                                <input type="text" name='user_firstname' placeholder='Test' disabled
+                                <input type="text" name='user_firstname' placeholder='Tony' disabled
                                     style={{
                                         cursor: 'not-allowed',
                                         background: '#ffffffb0',
@@ -33,7 +33,7 @@ export const EditName = () => {
                             </div>
                             <div className='user-champs'>
                                 <label htmlFor="user_lastname">Last Name:</label>
-                                <input type="text" name='user_lastname' placeholder='Test' disabled
+                                <input type="text" name='user_lastname' placeholder='Jarvis' disabled
                                     style={{
                                         cursor: 'not-allowed',
                                         background: '#ffffffb0',

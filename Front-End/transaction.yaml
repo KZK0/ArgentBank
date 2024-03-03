@@ -1,0 +1,197 @@
+openapi: 3.0.0
+info:
+  title: ARGENT BANK API
+  description: |-
+    # ARGENT BANK Account Manager.
+  version: 1.0.0
+
+servers:
+  - url: https://localhost:3001/api/v1
+    description: Server
+
+paths:
+  /account/{account}:
+    get:
+      summary: All transactions of the account
+      description: Return every transaction of the account.
+      parameters:
+        - name: account
+          in: path
+          required: true
+          description: User account ID 
+          schema:
+            type: integer
+      security:
+        - bearer: []  
+      responses:
+        '200':
+          description: Correctly retrieved data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+        '401':
+          description: Unauthenticated user
+          content:
+            application/json:
+              example:
+                error: "Unauthorized, please reconnect"  
+        '403':
+          description: Authenticated user but not allowed to retrieve data
+          content:
+            application/json:
+              example:
+                error: "Forbidden"    
+        '404': 
+          description: Not found
+          content:
+            application/json:
+              example:
+                error: "Resource not found" 
+        '500': 
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                error: "Internal server error"  
+
+  /transaction/{transaction}:
+    get:
+      summary: Details of a transaction
+      description: Return details of a transaction.
+      parameters:
+        - name: transaction
+          in: path
+          required: true
+          description: User transaction ID 
+          schema:
+            type: integer
+      security:
+        - bearer: []  
+      responses:
+        '200':
+          description: Correctly retrieved data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'
+        '401':
+          description: Unauthenticated user
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"  
+        '403':
+          description: Authenticated user but not allowed to retrieve data
+          content:
+            application/json:
+              example:
+                error: "Forbidden"    
+        '404': 
+          description: Not found
+          content:
+            application/json:
+              example:
+                error: "Transaction not found"  
+        '500': 
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                error: "Internal server error"  
+
+    patch:
+      summary: Update specific properties of a transaction
+      description: Update properties of a transaction.
+      parameters:
+        - name: transaction
+          in: path
+          required: true
+          description: User transaction ID 
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateTransactionRequest'
+      security:
+        - bearer: []  
+      responses:
+        '200':
+          description: Transaction updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'
+        '401':
+          description: Unauthenticated user
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"  
+        '403':
+          description: Authenticated user but not allowed to update data
+          content:
+            application/json:
+              example:
+                error: "Forbidden"
+        '404': 
+          description: Transaction not found
+          content:
+            application/json:
+              example:
+                error: "Transaction not found"  
+        '500': 
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                error: "Internal server error"  
+
+components:
+  schemas: 
+    transaction: 
+      properties :
+        transaction_id: 
+          type: string
+        date:
+          type: string
+        description:
+          type: string
+        amount: 
+          type: number
+        transactionType:
+          type: string
+        category: 
+          type: string
+        note:
+          type: string
+          
+    account:
+      properties:
+        account_id:
+          type: string
+        name:
+          type: string
+        totalAmount:
+          type: number
+        balance:
+          type: number
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/transaction'
+  
+    updateTransactionRequest:
+      properties:
+        category: 
+          type: string
+        note:
+          type: string
+  
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
