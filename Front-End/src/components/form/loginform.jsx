@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../actions/login.action';
+
+import { LOGIN_USER_SUCCESS } from '../../actions/login.action';
+import { LOGIN_USER_ERROR } from '../../actions/login.action';
 
 import './loginform.scss';
+
 
 export const LoginForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isAuthenticated = useSelector(state => state.login.auth);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -16,21 +18,32 @@ export const LoginForm = () => {
         e.preventDefault();
 
         try {
-            const response = await dispatch(loginUser(email, password));
-            console.log('Response:', response);
-            console.log('isAuthenticated:', isAuthenticated);
-            console.log('Token:', response.token);
-            if (response && response.token && isAuthenticated) {
-                // Stocker le token dans le localStorage
-                localStorage.setItem('token', response.token);
-                // Rediriger vers la page Dashboard
+            const response = await fetch('http://localhost:3001/api/v1/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+
+            const data = await response.json();
+            console.log(data.body.token);
+
+            if (response.ok) {
+                dispatch({ type: LOGIN_USER_SUCCESS, payload: { token: data.body.token } }); // Authentification réussie
+                localStorage.setItem("token", data.body.token);
                 navigate('/Dashboard');
-                console.log("Connecté !");
+                return data.body.token; // Retourne le token pour être utilisé ultérieurement
             } else {
-                console.error('Failed to login: Invalid response');
+                // Erreur d'authentification
+                throw new Error(data.message);
             }
         } catch (error) {
-            console.error('Failed to login:', error.message);
+            dispatch({ type: LOGIN_USER_ERROR, payload: { error: error.message } }); // Erreur lors de la requête
+            throw error;
         }
     };
 
