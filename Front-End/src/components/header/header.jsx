@@ -1,8 +1,20 @@
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../actions/login.action';
+
 import './header.scss';
 
-
 export const Header = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isAuthenticated = useSelector(state => state.login.auth);
+
+    const Logout = () => {
+        dispatch(logoutUser());
+        navigate('/Login');
+    };
+
     return (
         <header className='header-section'>
             <nav>
@@ -12,18 +24,27 @@ export const Header = () => {
                     </NavLink>
                 </div>
                 <div className='header-scnd-bloc'>
-                    <div className='scnd-user'>
-                        <i className="fa-solid fa-circle-user"></i>
-                        <p>Test</p>
-                    </div>
-                    <NavLink to="/Login">
+                    {isAuthenticated ? (
                         <div className='scnd-log'>
-                            <i className="fa-solid fa-circle-user"></i>
-                            <p>Sign In</p>
+                            <div className='logged-name'>
+                                <i className="fa-solid fa-circle-user"></i>
+                                <p>Tony</p>
+                            </div>
+                            <div className='logged-btn-out' onClick={Logout}>
+                                <i className="fa-solid fa-right-from-bracket"></i>
+                                <p>Logout</p>
+                            </div>
                         </div>
-                    </NavLink>
+                    ) : (
+                        <NavLink to="/Login">
+                            <div className='thrd-log'>
+                                <i className="fa-solid fa-circle-user"></i>
+                                <p>Login</p>
+                            </div>
+                        </NavLink>
+                    )}
                 </div>
             </nav>
         </header>
-    )
-}
+    );
+};

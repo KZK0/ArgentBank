@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,12 +7,23 @@ import { LOGIN_USER_ERROR } from '../../actions/login.action';
 
 import './loginform.scss';
 
-
 export const LoginForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+
+    useEffect(() => {
+        const storedEmail = sessionStorage.getItem('rememberedEmail');
+        if (storedEmail) {
+            setEmail(storedEmail);
+        }
+    }, []);
+
+    const RememberMeChange = (e) => {
+        setRememberMe(e.target.checked);
+    };
 
     const SubmitForm = async (e) => {
         e.preventDefault();
@@ -34,7 +45,12 @@ export const LoginForm = () => {
 
             if (response.ok) {
                 dispatch({ type: LOGIN_USER_SUCCESS, payload: { token: data.body.token } }); // Authentification réussie
-                localStorage.setItem("token", data.body.token);
+                if (rememberMe) {
+                    sessionStorage.setItem("rememberedEmail", email); // Enregistrer l'email dans le sessionStorage si "Remember me" est coché
+                } else {
+                    sessionStorage.removeItem("rememberedEmail"); // Supprimer l'email du sessionStorage si "Remember me" n'est pas coché
+                }
+                sessionStorage.setItem("token", data.body.token);
                 navigate('/Dashboard');
                 return data.body.token; // Retourne le token pour être utilisé ultérieurement
             } else {
@@ -52,7 +68,7 @@ export const LoginForm = () => {
             <form className='login-form' onSubmit={SubmitForm}>
                 <div className='form-top'>
                     <i className="fa-solid fa-circle-user"></i>
-                    <h3>Sign In</h3>
+                    <h3>Login</h3>
                 </div>
                 <div className='form-mid'>
                     <div className='form-champs'>
@@ -76,7 +92,12 @@ export const LoginForm = () => {
                         />
                     </div>
                     <div className='form-checkbox'>
-                        <input name='remember-me' type="checkbox" />
+                        <input
+                            name='remember-me'
+                            type="checkbox"
+                            checked={rememberMe}
+                            onChange={RememberMeChange}
+                        />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
                     <button aria-label='Submit login form' type='submit' id='submit-btn'>
