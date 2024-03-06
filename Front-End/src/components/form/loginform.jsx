@@ -44,21 +44,21 @@ export const LoginForm = () => {
             console.log(data.body.token);
 
             if (response.ok) {
-                dispatch({ type: LOGIN_USER_SUCCESS, payload: { token: data.body.token } }); // Authentification réussie
+                dispatch({ type: LOGIN_USER_SUCCESS, payload: { token: data.body.token } });
                 if (rememberMe) {
-                    sessionStorage.setItem("rememberedEmail", email); // Enregistrer l'email dans le sessionStorage si "Remember me" est coché
+                    sessionStorage.setItem("rememberedEmail", email);
                 } else {
-                    sessionStorage.removeItem("rememberedEmail"); // Supprimer l'email du sessionStorage si "Remember me" n'est pas coché
+                    sessionStorage.removeItem("rememberedEmail");
                 }
                 sessionStorage.setItem("token", data.body.token);
                 navigate('/Dashboard');
-                return data.body.token; // Retourne le token pour être utilisé ultérieurement
+                return data.body.token;
             } else {
-                // Erreur d'authentification
                 throw new Error(data.message);
             }
         } catch (error) {
-            dispatch({ type: LOGIN_USER_ERROR, payload: { error: error.message } }); // Erreur lors de la requête
+            dispatch({ type: LOGIN_USER_ERROR, payload: { error: error.message } });
+            alert('Your email or password might be wrong !');
             throw error;
         }
     };
@@ -68,7 +68,7 @@ export const LoginForm = () => {
             <form className='login-form' onSubmit={SubmitForm}>
                 <div className='form-top'>
                     <i className="fa-solid fa-circle-user"></i>
-                    <h3>Login</h3>
+                    <h3>Sign In</h3>
                 </div>
                 <div className='form-mid'>
                     <div className='form-champs'>
@@ -101,7 +101,7 @@ export const LoginForm = () => {
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
                     <button aria-label='Submit login form' type='submit' id='submit-btn'>
-                        Sign In
+                        Login
                     </button>
                 </div>
             </form>

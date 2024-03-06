@@ -9,9 +9,17 @@ export const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isAuthenticated = useSelector(state => state.login.auth);
+    const userName = useSelector(state => state.user.userInfo);
+
+
+    const Profil = () => {
+        navigate('/Dashboard');
+    }
 
     const Logout = () => {
         dispatch(logoutUser());
+        sessionStorage.removeItem('token');
+        localStorage.removeItem('token');
         navigate('/Login');
     };
 
@@ -20,15 +28,15 @@ export const Header = () => {
             <nav>
                 <div className='header-first-bloc'>
                     <NavLink to="/">
-                        <img src="/src/assets/images/logo/argentBankLogo.png" alt="Logo ArgentBank" />
+                        <img src="/src/assets/images/logo/argentBankLogo.webp" alt="Logo ArgentBank" />
                     </NavLink>
                 </div>
                 <div className='header-scnd-bloc'>
                     {isAuthenticated ? (
                         <div className='scnd-log'>
-                            <div className='logged-name'>
+                            <div className='logged-name' onClick={Profil}>
                                 <i className="fa-solid fa-circle-user"></i>
-                                <p>Tony</p>
+                                <p>{userName?.body?.userName || 'User'}</p>
                             </div>
                             <div className='logged-btn-out' onClick={Logout}>
                                 <i className="fa-solid fa-right-from-bracket"></i>

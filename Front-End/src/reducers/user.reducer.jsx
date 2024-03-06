@@ -1,27 +1,24 @@
-const intialState = {
-    loading: false,
-    userData: null,
+import { FETCH_USER_INFO_SUCCESS } from '../actions/user.action';
+import { FETCH_USER_INFO_FAILURE } from '../actions/user.action';
+
+const initialState = {
+    userInfo: null,
+    error: null
 };
 
-export default function userReducer(state = intialState, action) {
+export default function userReducer(state = initialState, action) {
     switch (action.type) {
-        case "GET_USER":
+        case FETCH_USER_INFO_SUCCESS:
             return {
                 ...state,
-                userData: action.payload,
+                userInfo: action.payload,
+                error: null
             };
-        case "UPDATE_USER":
+        case FETCH_USER_INFO_FAILURE:
             return {
                 ...state,
-                userData: action.payload,
-            };
-        case "ADD_USER":
-            return action.payload;
-
-        case "USER_LOGOUT":
-            return {
-                ...state,
-                userData: null,
+                userInfo: null,
+                error: action.payload
             };
         default:
             return state;
