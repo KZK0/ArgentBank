@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Home } from './pages/homepage/home';
 import { Login } from './pages/login/login';
 import { Dashboard } from './pages/dashboard/dashboard';
@@ -18,15 +19,19 @@ const store = configureStore({
 })
 
 
-const App = () => (
-  <div>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/Login" element={<Login />} />
-      <Route path="/Dashboard" element={<Dashboard />} />
-    </Routes>
-  </div>
-);
+const App = () => {
+  const isAuthenticated = useSelector(state => state.login.auth);
+
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/Login" />} />
+      </Routes>
+    </div>
+  );
+};
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
