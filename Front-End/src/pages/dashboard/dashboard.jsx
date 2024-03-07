@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Header } from '../../components/header/header';
 import { EditName } from '../../components/Edit/edit';
 import { Balance } from '../../components/card/card';
@@ -7,6 +8,11 @@ import './dashboard.scss'
 
 
 export const Dashboard = () => {
+
+    useEffect(() => {
+        document.title = "ArgentBank - Dashboard";
+    }, []);
+
     return (
         <div className='dashboard-page'>
             <Header />

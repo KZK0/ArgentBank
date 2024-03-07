@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Header } from '../../components/header/header'
 import { Banner } from '../../components/banner/banner'
 import { Infos } from '../../components/infos/infos'
@@ -7,6 +8,11 @@ import './home.scss'
 
 
 export const Home = () => {
+
+    useEffect(() => {
+        document.title = "ArgentBank - Home";
+    }, []);
+
     return (
         <div>
             <Header />
