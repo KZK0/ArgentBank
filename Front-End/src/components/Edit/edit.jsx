@@ -1,11 +1,11 @@
-// Importez useState, useEffect et useSelector si vous ne les avez pas déjà importés
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserInfo } from '../../actions/user.action';
+import { fetchUserInfo, updateUserName } from '../../actions/user.action';
 import './edit.scss';
 
 export const EditName = () => {
     const [isEditing, setIsEditing] = useState(false);
+    const [newUsername, setNewUsername] = useState('');
     const dispatch = useDispatch();
     const token = sessionStorage.getItem('token');
     const userInfo = useSelector(state => state.user.userInfo);
@@ -24,16 +24,29 @@ export const EditName = () => {
         setIsEditing(false);
     };
 
+    const FormSubmit = async (e) => {
+        e.preventDefault();
+        setIsEditing(false);
+        if (token && newUsername) {
+            dispatch(updateUserName(token, newUsername))
+        }
+    };
+
     return (
         <section className='editname-section'>
             {isEditing ? (
                 <div className='editname-action'>
                     <h2>Edit User Info</h2>
-                    <form className='edituser-form'>
+                    <form className='edituser-form' onSubmit={FormSubmit}>
                         <div className='userform-mid'>
                             <div className='user-champs'>
                                 <label htmlFor="user_name">User Name:</label>
-                                <input type="text" name='user_name' />
+                                <input
+                                    type="text"
+                                    name='user_name'
+                                    value={newUsername}
+                                    onChange={(e) => setNewUsername(e.target.value)}
+                                />
                             </div>
                             <div className='user-champs'>
                                 <label htmlFor="user_firstname">First Name:</label>
