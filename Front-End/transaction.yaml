@@ -12,8 +12,8 @@ servers:
 paths:
   /account/{account}:
     get:
-      summary: All transactions of the account
-      description: Return every transaction of the account.
+      summary: All monthly transactions of the account
+      description: Return every monthly transaction of the account.
       parameters:
         - name: account
           in: path

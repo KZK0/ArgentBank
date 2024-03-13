@@ -1,19 +1,15 @@
 import './infos.scss';
 
-export const Infos = ({ data }) => {
+export const Infos = ({ id, cover, alt, title, desc }) => {
     return (
-        <section className='infos-section'>
-            <div className='infos-bloc'>
-                {data.map((item) => (
-                    <div key={item.id} className='infos-card'>
-                        <div className='infos-img'>
-                            <img src={item.cover} alt={item.alt} />
-                        </div>
-                        <h2>{item.title}</h2>
-                        <p>{item.desc}</p>
-                    </div>
-                ))}
+        <div className='infos-bloc'>
+            <div key={id} className='infos-card'>
+                <div className='infos-img'>
+                    <img src={cover} alt={alt} />
+                </div>
+                <h2>{title}</h2>
+                <p>{desc}</p>
             </div>
-        </section>
+        </div>
     )
 }

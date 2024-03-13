@@ -17,7 +17,18 @@ export const Dashboard = () => {
         <div className='dashboard-page'>
             <Header />
             <EditName />
-            <Balance data={Currency} />
+            <div className='balance-section'>
+                {
+                    Currency.map((item) => {
+                        return <Balance
+                            key={item.id}
+                            type={item.type}
+                            balance={item.balance}
+                            available={item.available}
+                        />
+                    })
+                }
+            </div>
             <Footer />
         </div>
     )

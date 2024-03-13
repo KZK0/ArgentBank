@@ -14,10 +14,22 @@ export const Home = () => {
     }, []);
 
     return (
-        <div>
+        <div className='section-homepage'>
             <Header />
             <Banner />
-            <Infos data={Data} />
+            <div className='bloc-card-infos'>
+                {
+                    Data.map((item) => {
+                        return <Infos
+                            key={item.id}
+                            cover={item.cover}
+                            alt={item.alt}
+                            title={item.title}
+                            desc={item.desc}
+                        />
+                    })
+                }
+            </div>
             <Footer />
         </div>
     )
